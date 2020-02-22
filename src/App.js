@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from 'react'
+import useSpeedTyper from './hooks/useSpeedTyper'
 import './App.css';
 
 function App() {
+  const {
+     textAreaRef,
+     gameIsRunning,
+     textAreaContent,
+     setTextAreaContent,
+     timeRemaining,
+     startGame,
+     wordCount
+    } = useSpeedTyper(13)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>SPEED-TYPER</h1>
+      <textarea
+        ref={textAreaRef}
+        disabled={!gameIsRunning}
+        value={textAreaContent}
+        onChange={e => setTextAreaContent(e.target.value)}
+      />
+      <h4>Time remaining: {timeRemaining}</h4>
+      <button onClick={startGame}>Start Game</button>
+      <h1>Word count: {wordCount}</h1>
     </div>
-  );
+  )
 }
 
 export default App;
